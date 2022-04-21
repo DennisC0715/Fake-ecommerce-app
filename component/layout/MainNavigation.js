@@ -24,6 +24,9 @@ function MainNavigation() {
       <nav>
         <ul>
           <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
             <Link href="/Login">Users</Link>
           </li>
           <li>
