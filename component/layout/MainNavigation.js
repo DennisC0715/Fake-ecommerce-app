@@ -27,7 +27,11 @@ function MainNavigation() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <Link href="/Login">Users</Link>
+            <Link href="/Login">Login</Link>
+          </li>
+
+          <li>
+            <Link href="/Shop">Shop</Link>
           </li>
           <li>
             <Link href="/WishList">WishLists</Link>

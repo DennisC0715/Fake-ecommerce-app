@@ -1,32 +1,27 @@
-import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+// import { configureStore, applyMiddleware } from "redux";
+// import thunk from "redux-thunk";
+// import { composeWithDevTools } from "redux-devtools-extension";
+// import { createWrapper } from "next-redux-wrapper";
+// import rootReducer from "./reducers";
 
-const initialState = {
-  isOnLoginPage: false,
-  isLoading: false,
-  isAuthenticated: false,
-  emailIsValid: false,
-  passwordIsValid: false,
-  formIsValid: false,
-  enteredEmail: "",
-  enteredPassword: "",
-};
+// // initial states here
+// const initalState = {};
 
-const loginSlice = createSlice({
-  name: "LoginSlice",
-  initialState: initialState,
-  reducers: {
-    setOnloginPage(state) {
-      state.isOnLoginPage = ture;
-    },
-    setIsAuthenticated(state) {
-      state.isAuthenticated = ture;
-    },
-    formIsValid() {},
-  },
-});
+// // middleware
+// const middleware = [thunk];
 
-const store = configureStore({ reducer: { login: loginSlice.reducer } });
+// // creating store
+// export const store = configureStore(
+//   rootReducer,
+//   initalState,
+//   composeWithDevTools(applyMiddleware(...middleware))
+// );
 
-export const LoginAction = loginSlice.actions;
+// // assigning store to next wrapper
+// const makeStore = () => store;
 
-export default store;
+// export const wrapper = createWrapper(makeStore);
+import { configureStore } from "@reduxjs/toolkit";
+import cartReducer from "./slices/cartSlice";
+
+export const store = configureStore({ reducer: { cart: cartReducer } });

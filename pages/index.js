@@ -1,5 +1,3 @@
-import Cart from "./Cart";
-
 const Home = () => {
   return (
     <div>

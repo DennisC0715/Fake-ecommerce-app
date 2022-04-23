@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import classes from "./LoginForm.module.css";
 
 const Login = () => {
+ 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -68,11 +69,18 @@ const Login = () => {
       <form>
         <div className={classes.control}>
           <label htmlFor="email">Your Email</label>
-          <input type="email" id="email" required ref={emailInputRef} />
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email address"
+            required
+            ref={emailInputRef}
+          />
         </div>
         <div className={classes.control}>
           <label htmlFor="password">Your Password</label>
           <input
+            placeholder="Enter your password"
             type="password"
             id="password"
             required

@@ -1,8 +1,8 @@
 .auth {
   margin: 3rem auto;
-  width: 95%;
-  max-width: 25rem;
-  border-radius: 6px;
+  width: auto;
+  max-width: 30rem;
+  border-radius: 10px;
   background-color: #38015c;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
@@ -32,9 +32,10 @@
   color: #38015c;
   border-radius: 4px;
   border: 1px solid white;
-  width: 100%;
+  width: 70%;
   text-align: left;
   padding: 0.25rem;
+  margin-right: 0;
 }
 
 .actions {

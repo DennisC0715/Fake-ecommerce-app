@@ -1,21 +1,45 @@
 import styles from "./HeaderCartButton.module.css";
 import CartIcon from "./CartIcon";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
 
 const HeaderCartButton = (props) => {
+  const [btnIsMoving, setBtnIsMoving] = useState(false);
+  const cartNumber = useSelector((state) => state.cart.cartItemNumber);
+  const cartItem = useSelector((state) => state.cart.cartItems);
+
   const router = useRouter();
 
   const CartPage = () => {
     router.push("/Cart");
   };
 
+  const btnClasses = `${styles.button} ${btnIsMoving ? styles.bump : ""}`;
+
+  useEffect(() => {
+    console.log(cartItem);
+    if (cartItem.length === 0) {
+      return;
+    }
+    setBtnIsMoving(true);
+
+    const timer = setTimeout(() => {
+      setBtnIsMoving(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [cartItem]);
+
   return (
-    <button className={styles.button} onClick={CartPage}>
+    <button className={btnClasses} onClick={CartPage}>
       <span className={styles.icon}>
         <CartIcon></CartIcon>
       </span>
       <span>Your Cart</span>
-      <span className={styles.badge}>3</span>
+      <span className={styles.badge}>{cartNumber}</span>
     </button>
   );
 };
