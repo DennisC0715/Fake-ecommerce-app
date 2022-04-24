@@ -1,9 +1,16 @@
-.container {
+/* .container {
   display: flex;
   max-width: auto;
   max-height: auto;
 
   margin-left: 20px;
+} */
+
+.container {
+  max-width: auto;
+  max-height: auto;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
 }
 
 .item {
