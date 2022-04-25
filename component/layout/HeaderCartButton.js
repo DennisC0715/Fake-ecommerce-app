@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const HeaderCartButton = (props) => {
   const [btnIsMoving, setBtnIsMoving] = useState(false);
   const cartNumber = useSelector((state) => state.cart.cartItemNumber);
-  const cartItem = useSelector((state) => state.cart.cartItems);
+  // const cartItem = useSelector((state) => state.cart.cartItems);
 
   const router = useRouter();
 
@@ -18,8 +18,8 @@ const HeaderCartButton = (props) => {
   const btnClasses = `${styles.button} ${btnIsMoving ? styles.bump : ""}`;
 
   useEffect(() => {
-    console.log(cartItem);
-    if (cartItem.length === 0) {
+    console.log(cartNumber);
+    if (cartNumber === 0) {
       return;
     }
     setBtnIsMoving(true);
@@ -31,7 +31,7 @@ const HeaderCartButton = (props) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [cartItem]);
+  }, [cartNumber]);
 
   return (
     <button className={btnClasses} onClick={CartPage}>

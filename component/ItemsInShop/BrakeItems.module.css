@@ -9,6 +9,7 @@
 .container {
   max-width: auto;
   max-height: auto;
+  
   display: grid;
   grid-template-columns: auto auto auto auto auto;
 }

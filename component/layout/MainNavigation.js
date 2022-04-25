@@ -13,8 +13,9 @@ function MainNavigation() {
   };
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>
+      <div className={classes.logo} >
         <Image
+          onClick={homePage}
           src={logopicture}
           alt="areionBrakes inc logo"
           width={200}

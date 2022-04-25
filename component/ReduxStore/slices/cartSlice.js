@@ -10,7 +10,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: cartInitalState,
   reducers: {
-    addItem: (state, action) => {
+    cartAddItem: (state, action) => {
       state.cartItems.push(action.payload);
       state.cartItemNumber = state.cartItems.length;
       state.totalPrice =
@@ -20,5 +20,19 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem } = cartSlice.actions;
+const wishListInitailState = {
+  wishListItems: [],
+};
+
+export const wishListSlice = createSlice({
+  name: "wishList",
+  initialState: wishListInitailState,
+  reducers: {
+    wishListAddItem: (state) => {
+      state.wishListItems.push(action.payload);
+    },
+  },
+});
+
+export const { cartAddItem } = cartSlice.actions;
 export default cartSlice.reducer;

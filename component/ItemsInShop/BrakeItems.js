@@ -15,7 +15,7 @@ import oesfull from "../img/OESFull.jpg";
 import oesFront from "../img/OESFront.jpg";
 import oesRear from "../img/OESrear.jpg";
 
-import { addItem } from "../ReduxStore/slices/cartSlice";
+import { cartAddItem } from "../ReduxStore/slices/cartSlice";
 import { useDispatch } from "react-redux";
 
 const Dummy_Brakes = [
@@ -61,10 +61,12 @@ const BrakeItems = () => {
   const dispatch = useDispatch();
 
   const addItemHandler = (item) => {
-    dispatch(addItem(item));
-  };
+    dispatch(cartAddItem(item));
+  }
 
-  const removeItemHandler = (id) => {};
+  const removeItemHandler = (id) => {
+    dispatch();
+  };
 
   const products = Dummy_Brakes.map((item) => (
     <CardForBrakeItems
@@ -82,6 +84,7 @@ const BrakeItems = () => {
       onRemoveItem={removeItemHandler.bind(null, item.id)}
     />
   ));
+
   return (
     // <Container className={classes.top}>
     //   <Row lg={"auto"}>
