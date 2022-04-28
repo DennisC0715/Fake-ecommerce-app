@@ -31,11 +31,27 @@
 }
 
 .image {
-  margin-top: 2%;
-  margin-bottom: 2%;
+  margin-top: 2px;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.image h2 {
+  position: absolute;
+  text-align: center;
+  margin-top: 700px;
+  color: #d1cecf;
+}
+
+.btn {
+  position: absolute;
+  top: 71%;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
 }

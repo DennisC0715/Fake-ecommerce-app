@@ -6,12 +6,19 @@
   margin-right: auto;
   display: grid;
   grid-template-areas: "CartItem Checkout";
-
   gap: 10px;
-
   padding: 10px;
 }
 
 .float {
   float: right;
+}
+
+.text {
+  margin-top: 10px;
+  margin-left: 48px;
+}
+
+.nostyle {
+  text-decoration: none;
 }

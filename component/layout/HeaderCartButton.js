@@ -18,7 +18,6 @@ const HeaderCartButton = (props) => {
   const btnClasses = `${styles.button} ${btnIsMoving ? styles.bump : ""}`;
 
   useEffect(() => {
-    console.log(cartNumber);
     if (cartNumber === 0) {
       return;
     }

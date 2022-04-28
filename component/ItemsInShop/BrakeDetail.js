@@ -4,11 +4,52 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
-import imagessss from "../img/OESFront.jpg";
-
+import { useDispatch } from "react-redux";
+import { cartAddItem } from "../ReduxStore/slices/cartSlice";
+import drilledsloted from "../../component/detailPageImages/drilledsloted.jpg";
+import Pads from "../../component/detailPageImages/Pads.jpg";
+import productinfo from "../../component/detailPageImages/productinfo.jpg";
+import returnDetail from "../../component/detailPageImages/returnDetail.jpg";
+import shippingDetail from "../../component/detailPageImages/shippingDetail.jpg";
+import AddToCartButton from "./AddToCartButton";
 import classes from "./BrakeDetail.module.css";
 
-const BrakeDetail = () => {
+const BrakeDetail = (props) => {
+  const dispatch = useDispatch();
+  const {
+    detailImage,
+    set,
+    year,
+    made,
+    model,
+    engine,
+    price,
+    id,
+    key,
+    image,
+    isFavorite,
+    description,
+  } = props;
+
+  const detailButtonHandler = () => {
+    dispatch(
+      cartAddItem({
+        id: id,
+        key: key,
+        detailImage: detailImage,
+        set: set,
+        year: year,
+        made: made,
+        model: model,
+        engine: engine,
+        price: price,
+        image: image,
+        isFavorite: isFavorite,
+        description: description,
+      })
+    );
+  };
+
   return (
     <section>
       <Swiper
@@ -21,45 +62,42 @@ const BrakeDetail = () => {
       >
         <SwiperSlide>
           <div className={classes.image}>
-            <h1>
-              This Full Set Brake Kit is for: 2022 RAM 1500 ALL ENGINE. It
-              includes included 4 (2 FRONT, 2 REAR) Brake Roters and 8 (4 FRONT,
-              4 REAR) Brake Pads.
-            </h1>
-            <button>
-              includes included 4 (2 FRONT, 2 REAR) Brake Roters and 8 (4 FRONT,
-              4 REAR) Brake Pads.
-            </button>
+            <div className={classes.image}>
+              <Image src={detailImage} alt={set} width={960} height={800} />
+            </div>
+            <div className={classes.btn}>
+              <AddToCartButton onClick={detailButtonHandler} />
+            </div>
+            <h2>
+              {year} {made} {model} {engine}
+            </h2>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={imagessss} alt={123} width={700} height={700} />
+            <Image src={productinfo} alt={set} width={960} height={800} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={imagessss} alt={123} width={700} height={700} />
+            <Image src={drilledsloted} alt={set} width={960} height={800} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={imagessss} alt={123} width={700} height={700} />
+            <Image src={Pads} alt={set} width={960} height={800} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={imagessss} alt={123} width={700} height={700} />
+            <Image src={shippingDetail} alt={set} width={960} height={800} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={imagessss} alt={123} width={700} height={700} />
+            <Image src={returnDetail} alt={set} width={960} height={800} />
           </div>
         </SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
       </Swiper>
     </section>
   );

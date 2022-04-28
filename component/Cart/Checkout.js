@@ -1,16 +1,16 @@
 import classes from "./Checkout.module.css";
 import { useSelector } from "react-redux";
 
-const Checkout = () => {
+const Checkout = (props) => {
   const subtotal = useSelector((state) => state.cart.totalPrice);
-  const totalItemQuantity = useSelector((state) => state.cart.cartItemNumber);
+  const totalItemQuantity = props.cartItem.length;
   const saleTax = Math.ceil(Math.round(subtotal * 0.13));
   const deliveryFee = totalItemQuantity * 20;
   const totalPrice = subtotal + saleTax + deliveryFee;
 
   return (
     <div className={classes.container}>
-      <h1 className={classes.marginleft}>order Summary</h1>
+      <h1 className={classes.marginleft}>Order Summary</h1>
       <h5>
         <span className={classes.marginleft}>{totalItemQuantity} ITEMS</span>
         <span className={classes.split}>${subtotal}</span>

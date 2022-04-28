@@ -1,17 +1,11 @@
 import { useState, useRef } from "react";
 import classes from "./LoginForm.module.css";
 
-const Login = () => {
- 
-  const [isLogin, setIsLogin] = useState(true);
+const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-
-  const switchAuthModeHandler = () => {
-    setIsLogin((prevState) => !prevState);
-  };
 
   // const submitAuthHandler = (event) => {
   //   event.preventDefault();
@@ -65,7 +59,7 @@ const Login = () => {
 
   return (
     <section className={classes.auth}>
-      <h1>{isLogin ? "Login" : "Sign Up"}</h1>
+      <h1>Login</h1>
       <form>
         <div className={classes.control}>
           <label htmlFor="email">Your Email</label>
@@ -76,6 +70,7 @@ const Login = () => {
             required
             ref={emailInputRef}
           />
+          <p>Please enter valid value for Email</p>
         </div>
         <div className={classes.control}>
           <label htmlFor="password">Your Password</label>
@@ -86,22 +81,14 @@ const Login = () => {
             required
             ref={passwordInputRef}
           />
+          <p>Please enter valid value for Email</p>
         </div>
         <div className={classes.actions}>
-          {!isLoading && (
-            <button>{isLogin ? "Login" : "Create Account"}</button>
-          )}
+          <button>Login</button>
           {isLoading && <p>Loading....</p>}
-          <button
-            type="button"
-            className={classes.toggle}
-            onClick={switchAuthModeHandler}
-          >
-            {isLogin ? "Create new account" : "Login with existing account"}
-          </button>
         </div>
       </form>
     </section>
   );
 };
-export default Login;
+export default LoginForm;
