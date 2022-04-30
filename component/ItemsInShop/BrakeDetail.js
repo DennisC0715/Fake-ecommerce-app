@@ -15,6 +15,8 @@ import AddToCartButton from "./AddToCartButton";
 import classes from "./BrakeDetail.module.css";
 
 const BrakeDetail = (props) => {
+
+  
   const dispatch = useDispatch();
   const {
     detailImage,

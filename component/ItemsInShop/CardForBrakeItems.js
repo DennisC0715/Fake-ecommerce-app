@@ -8,25 +8,20 @@ import Link from "next/link";
 
 const CardForBrakeItems = (props) => {
   const router = useRouter();
+  const wishlist = useSelector((state) => state.wishlist.wishListItems);
+
+  const item = wishlist[wishlist.length + 1] === props.id;
+  const hasItem = wishlist.length > 0 && item;
+
+  const favoriteIcon = hasItem ? addtoWishlist : NoWishlist;
 
   const detailPageHandler = () => {
     router.push("/" + props.id);
   };
 
-  const wishList = useSelector((state) => state.wishlist.wishListItems);
-
-  // let wishListImage;
-
-  // if (wishList.length === 0) {
-  //   wishListImage = NoWishlist;
-  // }
-
-  // if (wishList.length > 0 && props.id === wishList[0].id) {
-  //   wishListImage = addtoWishlist;
-
-  // if (wishList[wishList.length-1].id === props.id && wishList.length > 0) {
-  //   wishListImage = addtoWishlist;
-  // }
+  const log = () => {
+    console.log(hasItem);
+  };
 
   return (
     <div className={classes.card}>
@@ -43,7 +38,7 @@ const CardForBrakeItems = (props) => {
       <div className={classes.priceAndQuantity}>
         <h3>Price: ${props.price}</h3>
         <Image
-          src={addtoWishlist}
+          src={favoriteIcon}
           alt="wishlistIcon"
           width={40}
           height={40}
@@ -53,6 +48,8 @@ const CardForBrakeItems = (props) => {
       </div>
       <button onClick={props.onAddItem}>ADD TO CART</button>
       <button onClick={detailPageHandler}>SHOW DETAIL</button>
+      <p>{hasItem ? "11111" : "22222222"}</p>
+      <button onClick={log}>log</button>
     </div>
   );
 };

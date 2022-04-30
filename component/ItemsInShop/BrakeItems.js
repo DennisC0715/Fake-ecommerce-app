@@ -37,6 +37,7 @@ const BrakeItems = (props) => {
       onAddItem={addItemHandler.bind(null, item)}
       onRemoveItem={removeItemHandler.bind(null, item.id)}
       toggleWishList={toggleWishListHandler.bind(null, item)}
+      item={item}
     />
   ));
 

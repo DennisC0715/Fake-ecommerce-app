@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import WishItem from "./WishItems";
 import classes from "./WishList.module.css";
-import { useEffect, useState } from "react";
 
 const WishList = () => {
   const wishList = useSelector((state) => state.wishlist.wishListItems);

@@ -3,10 +3,17 @@ import Image from "next/image";
 import addtoWishlist from "../img/addtoWishlist.png";
 // import NoWishlist from "../img/NoWishlist.png";
 import { removeItemFromList } from "../ReduxStore/slices/wishListSlice";
+
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const WishItem = (props) => {
   const { id, isFavirate, image, price, set, year, made, model } = props;
+  const router = useRouter();
+
+  const detailPageHandler = () => {
+    router.push("/" + props.id);
+  };
 
   const dispatch = useDispatch();
 
@@ -14,13 +21,19 @@ const WishItem = (props) => {
     dispatch(removeItemFromList(id));
   };
 
-  // const favImage = isFavirate ? NoWishlist : addtoWishlist;
+ 
 
   return (
     <div className={classes.container}>
       <div className={classes.item}>
-        <Image src={image} alt={set} width={100} height={100} />
-        <div className={classes.text}>
+        <Image
+          src={image}
+          alt={set}
+          width={100}
+          height={100}
+          onClick={detailPageHandler}
+        />
+        <div className={classes.text} onClick={detailPageHandler}>
           <h3>
             {year} {made} {model} {set} BRAKE KIT.
           </h3>

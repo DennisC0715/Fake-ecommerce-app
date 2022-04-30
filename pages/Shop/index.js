@@ -5,8 +5,9 @@ import oesRear from "../../component/img/OESrear.jpg";
 import fullset from "../../component/detailPageImages/fullsetdetail.jpg";
 import frontset from "../../component/detailPageImages/frontsetdetail.jpg";
 import rearset from "../../component/detailPageImages/rearsetdetail.jpg";
+import { useSelector } from "react-redux";
 
-const Dummy_Brakes = [
+export const Dummy_Brakes = [
   {
     id: "b1",
     set: "Full Set",
@@ -50,15 +51,17 @@ const Dummy_Brakes = [
       "It includes included 2 REAR Brake Roters and 4 REAR Brake Pads.",
   },
 ];
+
 const Brakes = (props) => {
   return <BrakeItems itemData={props.brakeItems} />;
 };
 
 export async function getStaticProps() {
+  
   // fetch aip to get date from database
   return {
     props: { brakeItems: Dummy_Brakes },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
 
