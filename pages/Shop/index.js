@@ -7,7 +7,7 @@ import frontset from "../../component/detailPageImages/frontsetdetail.jpg";
 import rearset from "../../component/detailPageImages/rearsetdetail.jpg";
 import { useSelector } from "react-redux";
 
-export const Dummy_Brakes = [
+const Dummy_Brakes = [
   {
     id: "b1",
     set: "Full Set",
@@ -57,7 +57,6 @@ const Brakes = (props) => {
 };
 
 export async function getStaticProps() {
-  
   // fetch aip to get date from database
   return {
     props: { brakeItems: Dummy_Brakes },

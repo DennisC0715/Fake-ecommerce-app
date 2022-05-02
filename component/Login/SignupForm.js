@@ -252,7 +252,7 @@ const SignupForm = () => {
           {/* //////////////////////////////////////Province//////////////////////////////////// */}
           <div className={classes.control2}>
             <label htmlFor="Province">Province</label>
-            <select>
+            <select id="province">
               <option>Plase select one</option>
               <option>Alberta</option>
               <option>British Columbia</option>

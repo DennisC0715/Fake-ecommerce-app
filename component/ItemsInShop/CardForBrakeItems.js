@@ -10,7 +10,7 @@ const CardForBrakeItems = (props) => {
   const router = useRouter();
   const wishlist = useSelector((state) => state.wishlist.wishListItems);
 
-  const item = wishlist[wishlist.length + 1] === props.id;
+  const item = wishlist.find((item) => item.id === props.id);
   const hasItem = wishlist.length > 0 && item;
 
   const favoriteIcon = hasItem ? addtoWishlist : NoWishlist;
@@ -19,8 +19,8 @@ const CardForBrakeItems = (props) => {
     router.push("/" + props.id);
   };
 
-  const log = () => {
-    console.log(hasItem);
+  const toggleWishList = () => {
+    props.toggleWishList();
   };
 
   return (
@@ -43,13 +43,11 @@ const CardForBrakeItems = (props) => {
           width={40}
           height={40}
           className={classes.image}
-          onClick={props.toggleWishList}
+          onClick={toggleWishList}
         />
       </div>
       <button onClick={props.onAddItem}>ADD TO CART</button>
       <button onClick={detailPageHandler}>SHOW DETAIL</button>
-      <p>{hasItem ? "11111" : "22222222"}</p>
-      <button onClick={log}>log</button>
     </div>
   );
 };

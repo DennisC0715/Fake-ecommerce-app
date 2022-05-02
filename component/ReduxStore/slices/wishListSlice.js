@@ -9,15 +9,16 @@ export const wishListSlice = createSlice({
   initialState: wishListInitailState,
   reducers: {
     wishListToggle: (state, action) => {
-      const existingItemIds = state.wishListItems.filter(
+      const existingItem = state.wishListItems.filter(
         (item) => item.id === action.payload.id
       );
-      const itemExist = existingItemIds.length;
+      const itemExist = existingItem.length;
 
       if (itemExist === 0) {
         state.wishListItems.push(action.payload);
         state.wishListItems = [...state.wishListItems];
       }
+
       if (itemExist === 1) {
         state.wishListItems = state.wishListItems.filter(
           (item) => item.id !== action.payload.id
