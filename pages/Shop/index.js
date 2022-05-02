@@ -5,7 +5,9 @@ import oesRear from "../../component/img/OESrear.jpg";
 import fullset from "../../component/detailPageImages/fullsetdetail.jpg";
 import frontset from "../../component/detailPageImages/frontsetdetail.jpg";
 import rearset from "../../component/detailPageImages/rearsetdetail.jpg";
-import { useSelector } from "react-redux";
+import WishlistModal from "../../component/Modal/WIshlistModal";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleModal } from "../../component/ReduxStore/slices/wishListSlice";
 
 const Dummy_Brakes = [
   {
@@ -53,7 +55,21 @@ const Dummy_Brakes = [
 ];
 
 const Brakes = (props) => {
-  return <BrakeItems itemData={props.brakeItems} />;
+  const showModal = useSelector((state) => state.wishlist.showModal);
+  const dispatch = useDispatch();
+
+  const hideModalHandler = () => {
+    dispatch(toggleModal());
+  };
+
+  return (
+    <div>
+      <BrakeItems itemData={props.brakeItems} />
+      {showModal && (
+        <WishlistModal onHide={hideModalHandler} itemData={props.brakeItems} />
+      )}
+    </div>
+  );
 };
 
 export async function getStaticProps() {
