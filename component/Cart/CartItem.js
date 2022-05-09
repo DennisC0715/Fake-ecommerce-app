@@ -1,35 +1,15 @@
 import classes from "./CartItem.module.css";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import {
-  cartAddItem,
-  cartRemoveItem,
-  cartRemoveOneItem,
-} from "../ReduxStore/slices/cartSlice";
 
 const CartItem = (props) => {
-  const { id, itemQuantity, price } = props;
-
-  const dispatch = useDispatch();
-
-  const addItemHandler = () => {
-    dispatch(cartAddItem({ id, itemQuantity, price }));
-  };
-
-  const removeItemHandler = () => {
-    dispatch(cartRemoveItem(id));
-  };
-
-  const removeOneItemHandler = () => {
-    dispatch(cartRemoveOneItem(id));
-  };
+  const { itemQuantity, price } = props;
 
   const OneItemTotalPrice = price * itemQuantity;
 
   return (
     <div className={classes.container}>
       <div className={classes.item}>
-        <Image src={props.image} alt={props.set} width={200} height={200} />
+        <Image src={props.image} alt={props.set} width={150} height={150} />
         <div className={classes.text}>
           <h3>
             {props.year} {props.made} {props.model} {props.set} BRAKE KIT.
@@ -39,14 +19,12 @@ const CartItem = (props) => {
             x <span>{props.itemQuantity}</span>
           </div>
         </div>
-        <div className={classes.price}>
-          <p>${OneItemTotalPrice}.00</p>
-        </div>
+        <div className={classes.price}>${OneItemTotalPrice}.00</div>
         <div className={classes.details}>{`($${props.price}/item)`}</div>
         <div className={classes.actions}>
-          <button onClick={removeItemHandler}>-</button>
-          <button onClick={addItemHandler}> +</button>
-          <button onClick={removeOneItemHandler}>REMOVE</button>
+          <button onClick={props.onRemoveQuantity}>-</button>
+          <button onClick={props.onAdd}> +</button>
+          <button onClick={props.onRemoveOneItem}>REMOVE</button>
         </div>
       </div>
     </div>

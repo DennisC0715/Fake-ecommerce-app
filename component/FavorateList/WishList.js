@@ -21,7 +21,6 @@ const WishList = () => {
       made={item.made}
       model={item.model}
       engine={item.engine}
-      isFavirate={item.isFavirate}
       price={item.price}
       set={item.set}
     />
@@ -30,10 +29,10 @@ const WishList = () => {
   return (
     <div className={classes.container}>
       <h1>MY WISHLIST</h1>
-      <h3>
+      <h4>
         {itemNumber} {itemText}
-      </h3>
-      <p>{itemTextP}</p>
+      </h4>
+      <h4>{itemTextP}</h4>
       {wishListItemInPage}
     </div>
   );

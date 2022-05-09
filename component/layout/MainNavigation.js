@@ -7,7 +7,10 @@ import { useRouter } from "next/dist/client/router";
 import writelogo from "../img/Areion_Decal_Inverted_1.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutHandler } from "../ReduxStore/slices/authSlice";
-import { Redirect } from "next";
+import { clearUserInfo } from "../ReduxStore/slices/userSlice";
+import { clearCart } from "../ReduxStore/slices/cartSlice";
+import { clearWishList } from "../ReduxStore/slices/wishListSlice";
+import { NavLink } from "./NavLink";
 
 function MainNavigation() {
   const userIsLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -21,6 +24,9 @@ function MainNavigation() {
 
   const logout = () => {
     dispatch(logoutHandler());
+    dispatch(clearUserInfo());
+    dispatch(clearCart());
+    dispatch(clearWishList());
     router.push("/");
   };
 
@@ -38,6 +44,8 @@ function MainNavigation() {
     </button>
   );
 
+  // const classsName = clicked ? `${classes.linksolid}` : "";
+
   return (
     <header className={classes.header}>
       <div className={classes.logo}>
@@ -45,8 +53,8 @@ function MainNavigation() {
           onClick={homePage}
           src={writelogo}
           alt="areionBrakes inc logo"
-          width={200}
-          height={45}
+          width={230}
+          height={60}
         />
       </div>
       <nav>

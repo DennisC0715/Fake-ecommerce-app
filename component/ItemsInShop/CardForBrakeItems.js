@@ -33,7 +33,7 @@ const CardForBrakeItems = (props) => {
         <h5>{`${props.year} ${props.made} ${props.model} ${props.engine}.`}</h5>
       </Link>
       <div className={classes.description}>
-        <h6>{props.description}</h6>
+        <h4>{props.description}</h4>
       </div>
       <div className={classes.priceAndQuantity}>
         <h3>Price: ${props.price}</h3>
@@ -42,7 +42,6 @@ const CardForBrakeItems = (props) => {
           alt="wishlistIcon"
           width={40}
           height={40}
-          className={classes.image}
           onClick={toggleWishList}
         />
       </div>

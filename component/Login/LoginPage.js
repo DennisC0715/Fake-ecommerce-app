@@ -1,6 +1,5 @@
 import LoginForm from "../../component/Login/LoginForm";
 import SignupForm from "../../component/Login/SignupForm";
-
 import classes from "./LoginPage.module.css";
 
 const LoginPage = () => {

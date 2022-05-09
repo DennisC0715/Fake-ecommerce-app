@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 const WishItem = (props) => {
-  const { id, isFavirate, image, price, set, year, made, model } = props;
+  const { id, image, price, set, year, made, model } = props;
   const router = useRouter();
 
   const detailPageHandler = () => {
@@ -29,12 +29,12 @@ const WishItem = (props) => {
         <Image
           src={image}
           alt={set}
-          width={100}
-          height={100}
+          width={150}
+          height={150}
           onClick={detailPageHandler}
         />
-        <div className={classes.text} onClick={detailPageHandler}>
-          <h3>
+        <div className={classes.text}>
+          <h3 onClick={detailPageHandler}>
             {year} {made} {model} {set} BRAKE KIT.
           </h3>
           <div className={classes.price}>

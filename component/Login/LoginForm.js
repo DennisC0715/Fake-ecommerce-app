@@ -1,9 +1,15 @@
 import { useState } from "react";
 import classes from "./LoginForm.module.css";
 import useLogin from "./login-hook";
+import { useDispatch } from "react-redux";
+import { loginHandler, logoutHandler } from "../ReduxStore/slices/authSlice";
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   //////////////////////for email input//////////////////////////////////////////////////
   const {
     value: enteredEmail,
@@ -53,6 +59,52 @@ const LoginForm = () => {
     ) {
       return;
     }
+    //fetch API
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyANg5WcYJ0ngyR69pRDapAv7Q-SaWhe3L8",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          let errorMessage = "Authentication Failed!";
+          throw new Error(errorMessage);
+        }
+      })
+      .then((data) => {
+        dispatch(loginHandler(data.idToken));
+        localStorage.setItem("email", enteredEmail);
+        //get expiresIn from data convert to unit second
+        const expiresIn = new Date(
+          new Date().getTime() + +data.expiresIn * 1000
+        );
+        //convet expiresIn to string
+        const expirationTime = expiresIn.toISOString();
+        // dispatch(expirationTimeSetup(3000));
+        const currentTime = new Date().getTime();
+        const adjExpirationTime = new Date(expirationTime).getTime();
+        const remainingTime = adjExpirationTime - currentTime;
+
+        setTimeout(() => {
+          dispatch(logoutHandler());
+        }, remainingTime);
+
+        router.push("/profile");
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
 
     //reset Inputs
     resetEmailInput();
@@ -99,52 +151,3 @@ const LoginForm = () => {
 };
 export default LoginForm;
 
-// const submitAuthHandler = (event) => {
-//   event.preventDefault();
-
-//   const enteredEmail = emailInputRef.current.value;
-//   const enteredPassword = passwordInputRef.current.value;
-//   setIsLoading(true);
-
-//   let url;
-
-//   if (isLogin) {
-//     url =
-//       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBIIQyUbN1-1PG5jIeHk-SwU1yeUzEmj78";
-//   } else {
-//     url =
-//       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBIIQyUbN1-1PG5jIeHk-SwU1yeUzEmj78";
-//   }
-//   fetch(url, {
-//     method: "POST",
-//     body: JSON.stringify({
-//       email: enteredEmail,
-//       password: enteredPassword,
-//       returnSecureToken: true,
-//     }),
-//     headers: {
-//       "Content-Type": "applicatiuon/json",
-//     },
-//   })
-//     .then((res) => {
-//       setIsLoading(false);
-//       if (res.ok) {
-//         return res.json();
-//       } else {
-//         res.json().then((data) => {
-//           let errorMessage = "Authentication failed!";
-//           throw new Error(errorMessage);
-//         });
-//       }
-//     })
-//     .then((data) => {
-//       const expirationTime = new Date(
-//         new Date().getTime() + +data.expiresIn * 1000
-//       );
-//       context.login(data.idToken, expirationTime.toISOString());
-//       history.replace("/");
-//     })
-//     .catch((error) => {
-//       alert(error.message);
-//     });
-// };

@@ -3,8 +3,9 @@ import UserNav from "../../../component/User/UserNav";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const Orderpage = () => {
+const AccountPage = () => {
   const router = useRouter();
+
   useEffect(() => {
     const initialToken = localStorage.getItem("token");
     if (!initialToken) {
@@ -15,8 +16,10 @@ const Orderpage = () => {
   return (
     <Fragment>
       <UserNav></UserNav>
-      <h1>Order History is Empty</h1>
+      <h1>Personal Information</h1>
+      <h1>Address Book</h1>
+      <h1>Log Out</h1>
     </Fragment>
   );
 };
-export default Orderpage;
+export default AccountPage;

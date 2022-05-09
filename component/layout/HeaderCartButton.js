@@ -12,7 +12,7 @@ const HeaderCartButton = (props) => {
   const router = useRouter();
 
   const CartPage = () => {
-    router.push("/Cart");
+    router.push("/cart");
   };
 
   const btnClasses = `${styles.button} ${btnIsMoving ? styles.bump : ""}`;

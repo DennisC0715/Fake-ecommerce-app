@@ -7,8 +7,6 @@ const WishlistModal = (props) => {
 
   const modalMessage = isAdding ? "added" : "removed";
 
-  console.log(isAdding);
-
   return (
     <div>
       <div className={style.backdrop} onClick={props.onHide} />

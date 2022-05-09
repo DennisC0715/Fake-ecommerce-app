@@ -15,8 +15,6 @@ import AddToCartButton from "./AddToCartButton";
 import classes from "./BrakeDetail.module.css";
 
 const BrakeDetail = (props) => {
-
-  
   const dispatch = useDispatch();
   const {
     detailImage,
@@ -65,7 +63,7 @@ const BrakeDetail = (props) => {
         <SwiperSlide>
           <div className={classes.image}>
             <div className={classes.image}>
-              <Image src={detailImage} alt={set} width={960} height={800} />
+              <Image src={detailImage} alt={set} width={960} height={808} />
             </div>
             <div className={classes.btn}>
               <AddToCartButton onClick={detailButtonHandler} />
@@ -77,27 +75,27 @@ const BrakeDetail = (props) => {
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={productinfo} alt={set} width={960} height={800} />
+            <Image src={productinfo} alt={set} width={960} height={808} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={drilledsloted} alt={set} width={960} height={800} />
+            <Image src={drilledsloted} alt={set} width={960} height={808} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={Pads} alt={set} width={960} height={800} />
+            <Image src={Pads} alt={set} width={960} height={808} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={shippingDetail} alt={set} width={960} height={800} />
+            <Image src={shippingDetail} alt={set} width={960} height={808} />
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className={classes.image}>
-            <Image src={returnDetail} alt={set} width={960} height={800} />
+            <Image src={returnDetail} alt={set} width={960} height={808} />
           </div>
         </SwiperSlide>
       </Swiper>

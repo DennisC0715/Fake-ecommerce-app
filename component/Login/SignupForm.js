@@ -1,9 +1,12 @@
 import { useState } from "react";
 import classes from "./SignupForm.module.css";
 import useLogin from "./login-hook";
+import { Router, useRouter } from "next/router";
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [provice, setProvice] = useState("");
+  const router = useRouter();
 
   ////////////////////////////////////Email//////////////////////////////////
   const {
@@ -123,6 +126,10 @@ const SignupForm = () => {
     ? "Please enter your address"
     : "Passowrd must be 6 digits or more";
 
+  const proviceChangeHandler = (event) => {
+    setProvice(event.target.value);
+  };
+
   const submitSignupHandler = (event) => {
     event.preventDefault();
 
@@ -152,6 +159,69 @@ const SignupForm = () => {
     ) {
       return;
     }
+    //send request to firebase API
+
+    fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyANg5WcYJ0ngyR69pRDapAv7Q-SaWhe3L8",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          res.json().then((data) => {
+            let errorMessage = "Authentication failed!";
+            throw new Error(errorMessage);
+          });
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+    //fetch user date to mongodb
+
+    fetch("/api/userInfo", {
+      method: "POST",
+      body: JSON.stringify({
+        firstName: enteredFirstName,
+        lastName: enteredLastName,
+        email: enteredEmail,
+        address: enteredAddress,
+        city: enteredCity,
+        province: provice,
+        postalCode: enteredPostalCode,
+        cart: [],
+        wishlistt: [],
+        orderHistory: [],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          let errorMessage = "Sending user Info failed!";
+          throw new Error(errorMessage);
+        }
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+
+    router.push("/profile");
 
     resetEmail();
     resetPassword();
@@ -252,18 +322,22 @@ const SignupForm = () => {
           {/* //////////////////////////////////////Province//////////////////////////////////// */}
           <div className={classes.control2}>
             <label htmlFor="Province">Province</label>
-            <select id="province">
-              <option>Plase select one</option>
-              <option>Alberta</option>
-              <option>British Columbia</option>
-              <option>Manitoba</option>
-              <option>New Brunswick</option>
-              <option>Newfoundland and Labrador</option>
-              <option>Nova Scotia</option>
-              <option>Ontario</option>
-              <option>Prince Edward Island</option>
-              <option>Quebec</option>
-              <option>Saskatchewan</option>
+            <select
+              id="province"
+              value={provice}
+              onChange={proviceChangeHandler}
+            >
+              <option value="">Plase select one</option>
+              <option value="Alberta">Alberta</option>
+              <option value="British Columbia">British Columbia</option>
+              <option value="Manitoba">Manitoba</option>
+              <option value="New Brunswick">New Brunswick</option>
+              <option value="Newfoundland">Newfoundland and Labrador</option>
+              <option value="Nova Scotia">Nova Scotia</option>
+              <option value="Ontario">Ontario</option>
+              <option value="Prince Edward Island">Prince Edward Island</option>
+              <option value="Quebec">Quebec</option>
+              <option value="Saskatchewan">Saskatchewan</option>
             </select>
           </div>
           {/* //////////////////////////////////////Postal Code//////////////////////////////////// */}

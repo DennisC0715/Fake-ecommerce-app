@@ -11,35 +11,32 @@ export const cartSlice = createSlice({
   initialState: cartInitalState,
   reducers: {
     cartAddItem: (state, action) => {
+      state.totalPrice =
+        state.totalPrice + action.payload.price * action.payload.quantity;
+
       const newItem = action.payload;
-      const existingItem = state.cartItems.find(
+      const existingItemIndex = state.cartItems.findIndex(
         (item) => item.id === newItem.id
       );
+      const existingItem = state.cartItems[existingItemIndex];
       state.cartItemNumber++;
+      let updatedItems;
       if (!existingItem) {
-        state.cartItems.push({
-          id: newItem.id,
-          key: newItem.key,
-          detailImage: newItem.detailImage,
-          set: newItem.set,
-          year: newItem.year,
-          made: newItem.made,
-          model: newItem.model,
-          engine: newItem.engine,
-          price: newItem.price,
-          image: newItem.image,
-          isFavorite: newItem.isFavorite,
-          description: newItem.description,
-          quantity: 1,
-        });
-
-        state.totalPrice = state.totalPrice + Number(newItem.price);
+        updatedItems = state.cartItems.concat(action.payload);
+        state.cartItems = updatedItems;
       } else {
-        existingItem.quantity++;
-        state.totalPrice = state.totalPrice + Number(existingItem.price);
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity++,
+        };
+        updatedItems = [...state.cartItems];
+        updatedItems[existingItemIndex] = updatedItem;
       }
+      console.log(state.cartItems);
+      console.log(state.cartItemNumber);
+      console.log(state.totalPrice);
     },
-    cartRemoveItem: (state, action) => {
+    cartRemoveItemQuantity: (state, action) => {
       const id = action.payload;
       const item = state.cartItems.find((item) => item.id === id);
       state.cartItemNumber--;
@@ -57,9 +54,29 @@ export const cartSlice = createSlice({
       state.totalPrice = state.totalPrice - item.quantity * item.price;
       state.cartItems = state.cartItems.filter((item) => item.id !== id);
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.totalPrice = 0;
+      state.cartItemNumber = 0;
+    },
+    mergeCarts: (state, action) => {
+      state.cartItems = action.payload;
+      state.cartItemNumber = state.cartItems.length;
+      const prices = state.cartItems.map((item) => item.price);
+      let allPrice = 0;
+      for (let i = 0; i < state.cartItems.length; i++) {
+        allPrice += prices[i];
+      }
+      state.totalPrice = allPrice;
+    },
   },
 });
 
-export const { cartAddItem, cartRemoveItem, cartRemoveOneItem } =
-  cartSlice.actions;
+export const {
+  cartAddItem,
+  cartRemoveItemQuantity,
+  cartRemoveOneItem,
+  clearCart,
+  mergeCarts,
+} = cartSlice.actions;
 export default cartSlice.reducer;

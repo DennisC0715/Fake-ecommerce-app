@@ -30,6 +30,7 @@ export const wishListSlice = createSlice({
         state.showModal = true;
         state.isAdding = false;
       }
+      console.log(state.wishListItems);
     },
     removeItemFromList(state, action) {
       state.wishListItems = state.wishListItems.filter(
@@ -40,9 +41,20 @@ export const wishListSlice = createSlice({
     toggleModal: (state) => {
       state.showModal = !state.showModal;
     },
+    clearWishList: (state) => {
+      state.wishListItems = [];
+    },
+    mergeWishlist: (state, action) => {
+      state.wishListItems = action.payload;
+    },
   },
 });
 
-export const { wishListToggle, removeItemFromList, toggleModal } =
-  wishListSlice.actions;
+export const {
+  wishListToggle,
+  removeItemFromList,
+  toggleModal,
+  clearWishList,
+  mergeWishlist,
+} = wishListSlice.actions;
 export default wishListSlice.reducer;

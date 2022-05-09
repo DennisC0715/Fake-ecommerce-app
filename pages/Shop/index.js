@@ -8,6 +8,8 @@ import rearset from "../../component/detailPageImages/rearsetdetail.jpg";
 import WishlistModal from "../../component/Modal/WIshlistModal";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleModal } from "../../component/ReduxStore/slices/wishListSlice";
+import { Fragment } from "react";
+import Head from "next/head";
 
 const Dummy_Brakes = [
   {
@@ -18,7 +20,6 @@ const Dummy_Brakes = [
     model: "1500",
     engine: "ALL ENGINE",
     price: "500",
-    isFavorite: false,
     detailImage: fullset,
     image: oesfull,
     description:
@@ -34,7 +35,6 @@ const Dummy_Brakes = [
     price: "320",
     image: oesFront,
     detailImage: frontset,
-    isFavorite: false,
     description:
       "It includes included 2 FRONT Brake Roters and 4 FRONT Brake Pads.",
   },
@@ -47,7 +47,6 @@ const Dummy_Brakes = [
     engine: "ALL ENGINE",
     price: "200",
     image: oesRear,
-    isFavorite: false,
     detailImage: rearset,
     description:
       "It includes included 2 REAR Brake Roters and 4 REAR Brake Pads.",
@@ -63,12 +62,15 @@ const Brakes = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
+      {/* <Head>
+        <title>Shop</title>
+        <mata charset="uft-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head> */}
       <BrakeItems itemData={props.brakeItems} />
-      {showModal && (
-        <WishlistModal onHide={hideModalHandler} itemData={props.brakeItems} />
-      )}
-    </div>
+      {showModal && <WishlistModal onHide={hideModalHandler} />}
+    </Fragment>
   );
 };
 

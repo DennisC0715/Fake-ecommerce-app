@@ -1,13 +1,36 @@
 import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 import Checkout from "./Checkout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
+import {
+  cartAddItem,
+  cartRemoveItemQuantity,
+  cartRemoveOneItem,
+  clearCart,
+} from "../ReduxStore/slices/cartSlice";
 
 const Cart = () => {
   const cartItem = useSelector((state) => state.cart.cartItems);
   const cartItemNumber = useSelector((state) => state.cart.cartItemNumber);
+  const dispatch = useDispatch();
   const showSummary = cartItemNumber > 0;
+
+  const addItemHandler = (item) => {
+    dispatch(cartAddItem({ ...item, quantity: 1 }));
+  };
+
+  const removeQuantiyHandler = (id) => {
+    dispatch(cartRemoveItemQuantity(id));
+  };
+
+  const removeItemHandler = (id) => {
+    dispatch(cartRemoveOneItem(id));
+  };
+
+  const clearCartHandler = () => {
+    dispatch(clearCart());
+  };
 
   const itemsInCart = cartItem.map((item) => (
     <CartItem
@@ -22,6 +45,9 @@ const Cart = () => {
       image={item.image}
       description={item.description}
       itemQuantity={item.quantity}
+      onAdd={addItemHandler.bind(null, item)}
+      onRemoveOneItem={removeItemHandler.bind(null, item.id)}
+      onRemoveQuantity={removeQuantiyHandler.bind(null, item.id)}
     />
   ));
 
@@ -37,7 +63,7 @@ const Cart = () => {
     <p>
       Once you add something to your bag - it will appear here. Ready to get
       started? Click
-      <Link href="/Shop" className={classes.nostyle}>
+      <Link href="/shop" className={classes.nostyle}>
         {` here `}
       </Link>
       to start shopping!
@@ -46,12 +72,12 @@ const Cart = () => {
 
   return (
     <div>
-      <h1 className={classes.text}>{bagText}</h1>
-      <h4 className={classes.text}>{text}</h4>
+      <h1 className={classes.text1}>{bagText}</h1>
+      <h4 className={classes.text2}>{text}</h4>
       <div className={classes.container}>
         <span>{itemsInCart}</span>
         <span className={classes.float}>
-          {showSummary && <Checkout cartItem={cartItem} />}
+          {showSummary && <Checkout ClearCart={clearCartHandler} />}
         </span>
       </div>
     </div>
