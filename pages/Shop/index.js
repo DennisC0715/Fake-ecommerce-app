@@ -5,7 +5,7 @@ import oesRear from "../../component/img/OESrear.jpg";
 import fullset from "../../component/detailPageImages/fullsetdetail.jpg";
 import frontset from "../../component/detailPageImages/frontsetdetail.jpg";
 import rearset from "../../component/detailPageImages/rearsetdetail.jpg";
-import WishlistModal from "../../component/Modal/WIshlistModal";
+import WishlistModal from "../../component/Modal/WishlistModal";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleModal } from "../../component/ReduxStore/slices/wishListSlice";
 import { Fragment } from "react";

@@ -19,7 +19,7 @@ const CartItem = (props) => {
             x <span>{props.itemQuantity}</span>
           </div>
         </div>
-        <div className={classes.price}>${OneItemTotalPrice}.00</div>
+        <div className={classes.price}>${OneItemTotalPrice}</div>
         <div className={classes.details}>{`($${props.price}/item)`}</div>
         <div className={classes.actions}>
           <button onClick={props.onRemoveQuantity}>-</button>
